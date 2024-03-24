@@ -1,12 +1,27 @@
-import TopMenuItem from './TopMenuItem';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { Link } from '@mui/material';
+import { getServerSession } from 'next-auth';
 import Image from 'next/image';
+import TopMenuItem from './TopMenuItem';
+import styles from './topmenu.module.css';
 
-export default function TopMenu () {
+export default async function TopMenu() {
+
+    const session = await getServerSession(authOptions)
+
     return (
-        <div className="h-[8%] w-full flex" style={{ backgroundColor: '#482B11', position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30 }}>
-            <Image src={'/img/logo.png'}  alt='logo' width={0} height={0} sizes="100vh" className='h-[70%] w-auto'/>
-            <TopMenuItem title='Home' pageRef='/home'/>
-            <TopMenuItem title='Booking' pageRef='/booking/'/>
+        <div className={styles.menucontainer}>
+            <TopMenuItem title='Booking' pageRef='/booking'/>
+            <Image src={'/img/logo.png'} className={styles.logoimg} alt='logo'
+            width={0} height={0} sizes='100vh'/>
+
+            {
+                session? <Link href="/api/auth/signout">
+                    <div className='flex items-center absolute left-0 h-full px-2 text-cyan-600 text-sm'>Sign-Out</div>
+                    </Link>
+                : <Link href="/api/auth/signin">
+                    <div className='flex items-center absolute left-0 h-full px-2 text-cyan-600 text-sm'>Sign-In</div></Link>
+            }
         </div>
     );
 }
