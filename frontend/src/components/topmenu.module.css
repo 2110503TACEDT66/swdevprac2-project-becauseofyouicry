@@ -31,6 +31,13 @@
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10pt;
-    color:grey;
+    color:white;
+    font: bold;
+    font-size: small;
+}
 
+.itemcontainer:hover {
+    transition: 500ms;
+    font-size: large;
+    color: rgb(255, 255, 181);
 }

@@ -24,7 +24,7 @@ export default function Banner () {
         setOpacity(0.9); // Fade out when changing image
         const timeout = setTimeout(() => {
             setOpacity(1); // Fade in after changing image
-        }, 500); // Adjust the duration of transition as needed
+        }, 300); // Adjust the duration of transition as needed
         return () => clearTimeout(timeout);
     }, [index]);
 
