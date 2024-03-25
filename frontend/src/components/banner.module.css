@@ -8,9 +8,9 @@
 }
 
 .bannerText {
-    color: rgb(203, 31, 94);
+    color: rgb(255, 255, 255);
     position: relative;
-    top: 220px;
+    top: 10%;
     z-index: 20;
     text-align: center;
     -webkit-text-stroke: 1px rgba(0, 0, 0, 0);

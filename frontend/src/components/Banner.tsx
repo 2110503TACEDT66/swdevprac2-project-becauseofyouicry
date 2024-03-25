@@ -24,20 +24,20 @@ export default function Banner () {
                 priority
                 objectFit='cover'/>
                 <div className={styles.bannerText}>
-                    <h1 className='text-4xl font-bold'>Vaccine Service Center</h1>
-                    <h3 className='text-xl font-serif font-bold'>Get Vaccinated Today: Protect Yourself and Your Community! Visit Us for Vaccination Services.</h3>
+                    <h1 className='text-4xl font-bold'>Campground Booking</h1>
+                    <h3 className='text-xl font-serif font-bold'>Let's your journey begin here</h3>
                 </div>
                 {/* {
                     session? <div className='z-20 absolute top-5 right-10 font-semibold text-white text-xl'>Welcome {session.user?.name}</div> 
                         : null
                 } */}
-                <button className='bg-white text-cyan-600 border border-cyan-600
+                {/* <button className='bg-white text-cyan-600 border border-cyan-600
                             font-semibold py-2 px-2 m-2 rounded z-30 absolute bottom-0 right-0
                             hover:bg-cyan-600 hover:text-white hover:border-transparent'
                             onClick={(e)=>{ e.stopPropagation(); router.push('/hospital')}}
                             >
                     Select Hospital
-                </button>
+                </button> */}
         </div>
     );
 }
