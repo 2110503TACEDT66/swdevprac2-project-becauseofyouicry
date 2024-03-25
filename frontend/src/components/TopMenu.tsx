@@ -9,30 +9,25 @@ export default async function TopMenu() {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className={styles.menucontainer}>
-      <TopMenuItem title="Booking" pageRef="/booking" />
-      <Image
-        src={"/img/logo.png"}
-        className={styles.logoimg}
-        alt="logo"
-        width={0}
-        height={0}
-        sizes="100vh"
-      />
-
-      {session ? (
-        <Link href="/api/auth/signout">
-          <div className="flex items-center absolute left-0 h-full px-2 text-cyan-600 text-sm text-white">
-            Sign-Out
-          </div>
-        </Link>
-      ) : (
-        <Link href="/api/auth/signin">
-          <div className="flex items-center absolute left-0 h-full px-2 text-cyan-600 text-sm text-white">
-            Sign-In
-          </div>
-        </Link>
-      )}
-    </div>
-  );
+    
+    
+            <div className={styles.menucontainer}>
+            <Image src={'/img/logo.png'} id='logoimage' className={styles.logoimg} alt='logo'
+            width={0} height={0} sizes='100vh'/>
+            <TopMenuItem title='Main' pageRef='/'/>
+            <TopMenuItem title='Campgrounds' pageRef='/campgrounds'/>
+            <TopMenuItem title='Booking' pageRef='/booking'/>
+            <TopMenuItem title='About us' pageRef='/aboutus'/>
+                
+                    {
+                        session? <Link href="/api/auth/signout">
+                            <div className='flex items-center absolute right-0 h-full px-2 absolute right-5 text-cyan-600 text-sm text-4xl font-bold'>Sign-Out</div>
+                            </Link>
+                        : <Link href="/api/auth/signin">
+                            <div className='flex items-center absolute right-0 h-full px-2 absolute right-5 text-cyan-600 text-sm text-4xl font-bold'>Sign-In</div></Link>
+                    }
+                
+            </div>
+    );
 }
+

@@ -8,7 +8,7 @@ export default function LocationDateReserve() {
   const [reserveDate, setReserveDate] = useState(new Date());
 
   return (
-    <div className="bg-slate-100 rounded-lg space-x-5 space-y-2 w-full px-10 py-8 flex flex-row justify-center w-[80%] ">
+    <div className="bg-slate-100 rounded-lg space-x-5 space-y-2 w-full px-10 py-8 flex flex-row justify-center w-[70%] ">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
           className='text-black p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-roboto-bold'

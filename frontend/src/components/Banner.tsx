@@ -1,61 +1,69 @@
-"use client";
+"use client"
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-import styles from "./banner.module.css";
-import Image from "next/image";
+import styles from './banner.module.css'
+import Image from 'next/image';
+import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
 
 //import { useSession } from 'next-auth/react';
 
-export default function Banner() {
-  const covers = [
-    "/img/cover.jpg",
-    "/img/cover2.jpg",
-    "/img/cover3.jpg",
-    "/img/cover4.jpg",
-  ];
-  const [index, setIndex] = useState(0);
-  const router = useRouter();
+export default function Banner () {
+    const covers = ['/img/cover.jpg','/img/cover2.jpg','/img/cover3.jpg','/img/cover4.jpg']
+    const [index, setIndex] = useState(0);
+    const router = useRouter();
+    const [opacity, setOpacity] = useState<number>(1);
+    const [initialRender, setInitialRender] = useState(true);
 
-  //const { data: session } = useSession()
+    useEffect(() => {
+        if (initialRender) {
+            setInitialRender(false);
+            return;
+        }
+        setOpacity(0.9); // Fade out when changing image
+        const timeout = setTimeout(() => {
+            setOpacity(1); // Fade in after changing image
+        }, 300); // Adjust the duration of transition as needed
+        return () => clearTimeout(timeout);
+    }, [index]);
 
-  return (
-    <div
-      className={styles.banner}
-      onClick={() => {
-        setIndex(index + 1);
-      }}
-    >
-      <Image
-        src={covers[index % 4]}
-        alt="cover"
-        fill={true}
-        priority
-        objectFit="cover"
-      />
-      <div className={styles.bannerText}>
-        <h1 className="text-4xl font-bold">Vaccine Service Center</h1>
-        <h3 className="text-xl font-serif font-bold">
-          Get Vaccinated Today: Protect Yourself and Your Community! Visit Us
-          for Vaccination Services.
-        </h3>
-      </div>
-      {/* {
-                    session? <div className='z-20 absolute top-5 right-10 font-semibold text-white text-xl'>Welcome {session.user?.name}</div> 
-                        : null
-                } */}
-      <button
-        className="bg-white text-cyan-600 border border-cyan-600
-                            font-semibold py-2 px-2 m-2 rounded z-30 absolute bottom-0 right-0
-                            hover:bg-cyan-600 hover:text-white hover:border-transparent"
-        onClick={(e) => {
-          e.stopPropagation();
-          router.push("/hospital");
-        }}
-      >
-        Select Hospital
-      </button>
-    </div>
-  );
+    function showNextImage() {
+        setIndex(index => {
+            if(index === covers.length - 1 ) return 0
+            return index + 1
+        })
+    }
+
+    function showPrevImage() {
+        setIndex(index => {
+            if(index === 0 ) return covers.length - 1
+            return index - 1
+        })
+    }
+    
+
+    return (
+        <div style={{ width:"100%", height:"100%", position:"relative"}}>
+        <div className={styles.banner}>
+            <Image src={covers[index]}
+                alt='cover'
+                fill={true}
+                priority
+                objectFit='cover'
+                style={{ opacity: opacity, transition: 'opacity 0.5s ease-in-out' }} />
+
+                <div className={styles.bannerText}>
+                    <h1 className='text-4xl font-bold'>Campground Booking</h1>
+                    <h3 className='text-xl font-serif font-bold'>Let's your journey begin here</h3>
+                </div>
+        </div>
+               <button onClick={showPrevImage} className={styles.slidebutton}  style={{left: 0}}>
+                <ArrowBigLeftDash/>
+               </button>
+               <button onClick={showNextImage} className={styles.slidebutton} style={{right: 0}}>
+                <ArrowBigRightDash/>
+               </button>
+        </div>
+    );
 }
+

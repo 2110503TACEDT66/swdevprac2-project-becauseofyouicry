@@ -3,15 +3,39 @@
     padding: 5px;
     margin: 0;
     width: 100vw;
-    height: 80vh;
+    height: 70vh;
     position:relative;
+    object-fit: cover;
 }
 
 .bannerText {
-    color: rgb(203, 31, 94);
+    color: rgb(255, 255, 255);
     position: relative;
-    top: 220px;
+    top: 10%;
     z-index: 20;
     text-align: center;
     -webkit-text-stroke: 1px rgba(0, 0, 0, 0);
+}
+
+.slidebutton {
+    all: unset;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 1rem;
+    cursor:pointer;
+    transition: background-color 200ms ease-in-out
+
+}
+
+.slidebutton > * {
+    stroke: white;
+    fill: none;
+    width: 2rem;
+    height: 2rem;
+}
+
+.slidebutton:hover {
+    background-color: rgba(253, 253, 253, 0.2);
 }
