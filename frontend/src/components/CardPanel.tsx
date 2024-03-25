@@ -40,6 +40,7 @@ export default function CardPanel() {
 
     return (
         <div>
+            
             <div style={{margin:"20px",display:"flex",flexDirection:"row", flexWrap:"wrap",justifyContent: "space-around", alignContent:"space-around", padding:"20px"}}>
                 {
                     mockHospitalRepo.map((hospitalItem)=>(
