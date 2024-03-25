@@ -4,12 +4,12 @@ import InteractiveCard from './InteractiveCard';
 import { useState } from 'react';
 import { Rating } from '@mui/material';
 
-export default function Card( {hospitalName, imgSrc, onRating} : {hospitalName:string, imgSrc:string, onRating?:Function}) {
+export default function Card( {campgroundName, imgSrc, onRating} : {campgroundName:string, imgSrc:string, onRating?:Function}) {
 
     const [rating, setValue] = useState<number|null>(5)
 
     return (
-        <InteractiveCard contentName={hospitalName}>
+        <InteractiveCard contentName={campgroundName}>
             <div className='w-full h-[60%] relative rounded-t-lg'>
                 <Image src={imgSrc}
                 alt='Hospital Picture'
@@ -17,19 +17,19 @@ export default function Card( {hospitalName, imgSrc, onRating} : {hospitalName:s
                 className='object-cover rounded-t-lg'/>
             </div>
             <div className='w-full h-[20%] p-[10px] text-sky-600 flex flex-col'>
-                {hospitalName}
+                {campgroundName}
             </div>
 
             {
-            onRating? <div className='w-full h-[20%] p-[10px] text-sky-600 flex flex-col' onClick={(e)=>{e.stopPropagation(); onRating(hospitalName, rating)}}>
+            onRating? <div className='w-full h-[20%] p-[10px] text-sky-600 flex flex-col' onClick={(e)=>{e.stopPropagation(); onRating(campgroundName, rating)}}>
             <Rating
-                id={hospitalName +' '+'Rating'}
-                name={hospitalName +' '+'Rating'}
-                data-testid={hospitalName +' '+'Rating'}
+                id={campgroundName +' '+'Rating'}
+                name={campgroundName +' '+'Rating'}
+                data-testid={campgroundName +' '+'Rating'}
                 value={rating}
                 onChange={(event, newValue) => {
                 setValue(newValue);
-                onRating(hospitalName, newValue)
+                onRating(campgroundName, newValue)
                 }}/>
             </div> : ''
             }

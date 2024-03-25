@@ -1,4 +1,4 @@
-export default async function getHospital(cid:String) {
+export default async function getCampground(cid:String) {
     
     const response = await fetch(`http://localhost:4000/api/v1/campgrounds/${cid}`)
     if(!response.ok){
