@@ -15,7 +15,6 @@ export default async function TopMenu() {
             <Image src={'/img/logo.png'} id='logoimage' className={styles.logoimg} alt='logo'
             width={0} height={0} sizes='100vh'/>
             <TopMenuItem title='Main' pageRef='/'/>
-            <TopMenuItem title='Campgrounds' pageRef='/campgrounds'/>
             <TopMenuItem title='Booking' pageRef='/booking'/>
             <TopMenuItem title='About us' pageRef='/aboutus'/>
                 
