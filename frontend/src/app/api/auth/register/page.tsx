@@ -20,16 +20,17 @@ const RegisterPage: React.FC = () => {
       console.log('Registration successful');
       alert('Registration successful');
       // Redirect or navigate to another page here if needed
-    } catch (error) {
-      setError(error.message || 'Failed to register user');
-      console.error('Error registering user:', error);
+    } catch (error: unknown) {
+      const err = error as any ;
+      alert('Please check your tel. or Email it already registered.');
+      throw new Error(err.message || 'Failed to register user');
     }
   };
 
   return (
     <div className={`${styles.area} relative min-h-screen flex justify-center items-center overflow-hidden`}>
-      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
-        <div className="bg-white p-8 rounded shadow-md w-80 relative z-10">
+      <div className="absolute inset-0 flex justify-center items-start bg-black bg-opacity-40">
+        <div className="bg-white p-8 rounded shadow-md w-80 relative z-10 mt-20">
           <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
           {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
           <form onSubmit={handleRegister} className="space-y-4">

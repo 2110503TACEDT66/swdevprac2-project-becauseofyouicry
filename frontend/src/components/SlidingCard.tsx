@@ -4,30 +4,24 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css'
 import 'swiper/css/bundle'
-
 import 'swiper/css/pagination';
 import './navigation.css'
 import './pagination.css'
 
 
-import getCampgrounds from "@/libs/getCampgrounds";
-import CampgroundCatalog from "@/components/CampgroundCatalog";
-import { Suspense } from "react";
-import { LinearProgress } from "@mui/material";
 import Card from './Card';
 
+import { Link } from '@mui/material';
 
-export default async function SlidingCard() {
 
-  const campgrounds = await getCampgrounds();
-  console.log(campgrounds.data)
-  
+
+export default function SlidingCard( {campgroundJson}:{campgroundJson:CampgroundJson}) {
   
     return(
       <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
-      slidesPerView={3}
+      slidesPerView={4}
       navigation
       pagination={{
         dynamicBullets: true,
@@ -35,18 +29,19 @@ export default async function SlidingCard() {
         //currentClass: 'pagination',
         //el: '.swiper-pagination-custom'
       }}
-    
     >
       <div className=''>
     {
-     campgrounds.data.map((campgroundItem:CampgroundItem)=>(
+      
+     campgroundJson.data.map((campgroundItem:CampgroundItem)=>(
       <SwiperSlide >
-        <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
-          <Card campgroundName={campgroundItem.name} imgSrc={`/img/${campgroundItem.name}.jpg`}></Card>
-          
-        </Suspense>
+          <Link href={`/campground/${campgroundItem._id}`} className="w-1/5">
+          <Card campgroundName={campgroundItem.name} imgSrc={`/img/${campgroundItem.name} CARD.jpg`}></Card>
+          </Link>
       </SwiperSlide>
+      
      )) 
+     
      }
      </div>
       

@@ -24,15 +24,24 @@ export const authOptions: AuthOptions = {
   })],
   session: { strategy: "jwt" },
   pages: {
-    signIn: "/api/auth/login",
-    signOut: "/api/auth/signout",
+    signIn: "/api/auth/login"
   },
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, ...user };
+      console.log("JWT Callback - Token:", token);
+      console.log("JWT Callback - User:", user);
+      if (user) {
+        token.user = user;
+      }
+      return token;
     },
     async session({ session, token, user }) {
-      session.user = token as any;
+      console.log("Session Callback - Session:", session);
+      console.log("Session Callback - Token:", token);
+      console.log("Session Callback - User:", user);
+      if (token && token.user) {
+        session.user = token.user as any;
+      }
       return session;
     }
   }

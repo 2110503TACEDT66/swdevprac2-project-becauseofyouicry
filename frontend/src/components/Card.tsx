@@ -12,11 +12,11 @@ export default function Card( {campgroundName, imgSrc, onRating} : {campgroundNa
         <InteractiveCard contentName={campgroundName}>
             <div className='w-full h-[60%] relative rounded-t-lg'>
                 <Image src={imgSrc}
-                alt='Hospital Picture'
+                alt='Campground Picture'
                 fill={true}
                 className='object-cover rounded-t-lg'/>
             </div>
-            <div className='w-full h-[20%] p-[10px] text-sky-600 flex flex-col'>
+            <div className='w-full h-[20%] p-[10px] text-white flex flex-col text-center font-medium'>
                 {campgroundName}
             </div>
 

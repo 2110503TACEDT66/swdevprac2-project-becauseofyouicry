@@ -29,15 +29,14 @@
     margin-left:0px;
     margin-right: 0px;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 10pt;
+    font-family: "Gill Sans", sans-serif;
     color:white;
-    font: bold;
-    font-size: small;
+    font: bolder;
+    font-size: large;
 }
 
 .itemcontainer:hover {
     transition: 500ms;
-    font-size: large;
+    font-size: x-large;
     color: rgb(255, 255, 181);
 }
