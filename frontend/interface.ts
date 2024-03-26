@@ -1,4 +1,4 @@
-interface CampgroundItem {
+export interface CampgroundItem {
     _id: string,
     name: string,
     address: string,
@@ -9,7 +9,7 @@ interface CampgroundItem {
     id: string
   }
   
-  interface CampgroundJson {
+  export interface CampgroundJson {
     success: boolean,
     count: number,
     pagination: Object,

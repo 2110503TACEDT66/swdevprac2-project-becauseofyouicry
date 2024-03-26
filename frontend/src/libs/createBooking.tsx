@@ -1,4 +1,4 @@
-// createBooking.tsx
+
 export default async function createBooking(
     campgroundId: string,
     userId: string,
@@ -16,13 +16,12 @@ export default async function createBooking(
             body: JSON.stringify({
                 campgroundId: campgroundId,
                 user: userId,
-                Date: date, // Corrected property name
-                createdAt: createdAt // No need to convert createdAt to ISO string format
+                Date: date, 
+                createdAt: createdAt 
             })
         });
 
         if (!response.ok) {
-            // If response is not OK, throw an error with the error message from the backend
             const errorData = await response.json();
             throw new Error(errorData.message);
         }
@@ -30,7 +29,6 @@ export default async function createBooking(
         return await response.json();
     } catch (error : unknown) {
         const err = error as any ;
-        // Throw a JavaScript error with the message received from the backend
         throw new Error(err.message || "Failed to create booking");
     }
 }
