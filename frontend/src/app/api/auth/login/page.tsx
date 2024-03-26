@@ -4,6 +4,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Link } from '@mui/material';
 import styles from './LoginPage.module.css';
+import dynamic from "next/dynamic";
+
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -26,7 +28,7 @@ const LoginPage: React.FC = () => {
         setError(result.error);
       } else {
         if (router) {
-          alert('Login Success !!')
+          alert('Login Success!!')
           router.push('/');
         }
       }
@@ -94,4 +96,5 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default dynamic (() => Promise.resolve(LoginPage), {ssr: false})
+
