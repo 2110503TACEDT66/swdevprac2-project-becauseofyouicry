@@ -26,7 +26,7 @@ const LoginPage: React.FC = () => {
         setError(result.error);
       } else {
         if (router) {
-          alert('Login Success !!')
+          alert('Login Success!!')
           router.push('/');
         }
       }
