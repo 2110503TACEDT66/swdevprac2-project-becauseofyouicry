@@ -27,7 +27,7 @@ export default async function SlidingCard() {
       <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
-      slidesPerView={3}
+      slidesPerView={4}
       navigation
       pagination={{
         dynamicBullets: true,
@@ -42,7 +42,7 @@ export default async function SlidingCard() {
      campgrounds.data.map((campgroundItem:CampgroundItem)=>(
       <SwiperSlide >
         <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
-          <Card campgroundName={campgroundItem.name} imgSrc={`/img/${campgroundItem.name}.jpg`}></Card>
+          <Card campgroundName={campgroundItem.name} imgSrc={`/img/${campgroundItem.name} CARD.jpg`}></Card>
           
         </Suspense>
       </SwiperSlide>
