@@ -1,8 +1,9 @@
 'use client'
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Link } from "@mui/material";
-import styles from './RegisterPage.module.css'; // Import your CSS file
-import userRegister from '@/libs/userRegister'; // Import your userRegister function
+import styles from './RegisterPage.module.css';
+import userRegister from '@/libs/userRegister';
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -12,14 +13,12 @@ const RegisterPage: React.FC = () => {
   const [error, setError] = useState('');
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     try {
-      // Call userRegister function
       await userRegister(username, email, password, tel);
       console.log('Registration successful');
       alert('Registration successful');
-      // Redirect or navigate to another page here if needed
     } catch (error: unknown) {
       const err = error as any ;
       alert('Please check your tel. or Email it already registered.');
@@ -78,12 +77,11 @@ const RegisterPage: React.FC = () => {
               Register
             </button>
           </form>
-          {/* Add a link or button to navigate to the login page */}
-          <div className="mt-4 text-center">
+          {<div className="mt-4 text-center">
             <Link href="/api/auth/signin">
               <a className="text-blue-500 underline">Already have an account?</a>
             </Link>
-          </div>
+          </div>}
         </div>
       </div>
 
