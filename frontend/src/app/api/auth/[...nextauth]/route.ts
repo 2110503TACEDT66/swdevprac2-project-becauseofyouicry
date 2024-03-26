@@ -24,15 +24,15 @@ export const authOptions: AuthOptions = {
   })],
   session: { strategy: "jwt" },
   pages: {
-    signIn: "/api/auth/login",
-    signOut: "/api/auth/signout",
+    signIn: "/api/auth/login"
+    // signOut: "/api/auth/signout",
   },
   callbacks: {
     async jwt({ token, user }) {
       console.log("JWT Callback - Token:", token);
       console.log("JWT Callback - User:", user);
       if (user) {
-        token.user = user; // Assuming user object should be stored under 'user' property in token
+        token.user = user;
       }
       return token;
     },

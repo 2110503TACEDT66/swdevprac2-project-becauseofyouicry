@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
 import { signIn } from 'next-auth/react';
 import { Link } from '@mui/material';
@@ -9,6 +9,13 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [router, setRouter] = useState<any>(null); // State to hold router instance
+
+  useEffect(() => {
+    // Import useRouter only when mounted on the client-side
+    const nextRouter = require('next/router');
+    setRouter(nextRouter);
+  }, []);
 
   const handleLogin = async () => {
     const result = await signIn('credentials', {
@@ -19,15 +26,17 @@ const LoginPage: React.FC = () => {
 
     if (result?.error) {
       setError(result.error);
-    }else{
-      alert('Login successful!');
+    } else {
+      if (router) {
+        router.push('/booking');
+      }
     }
   };
 
   return (
     <div className={`${styles.area} relative min-h-screen flex justify-center items-center overflow-hidden`}>
-      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
-        <div className="bg-white p-8 rounded shadow-md w-80 relative z-10">
+      <div className="absolute inset-0 flex justify-center items-start bg-black bg-opacity-40">
+        <div className="bg-white p-8 rounded shadow-md w-80 relative z-10 mt-20">
           <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
           {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
           <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }} className="space-y-4">
@@ -51,9 +60,11 @@ const LoginPage: React.FC = () => {
                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
               />
             </div>
+          
             <button type="submit" className="w-full inline-flex items-center justify-center h-12 border border-green-500 rounded-full bg-green-500 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 hover:bg-green-600 transition duration-300">
               Login
             </button>
+
           </form>
           <div className="mt-4 text-center">
             <Link href="/api/auth/register">
