@@ -22,6 +22,7 @@ const RegisterPage: React.FC = () => {
       // Redirect or navigate to another page here if needed
     } catch (error: unknown) {
       const err = error as any ;
+      alert('Please check your tel. or Email it already registered.');
       throw new Error(err.message || 'Failed to register user');
     }
   };
