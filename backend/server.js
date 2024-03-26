@@ -13,12 +13,7 @@ const helmet = require('helmet');
 const {xss} = require('express-xss-sanitizer');
 const hpp = require('hpp');
 const cors = require('cors');
-<<<<<<< HEAD
-=======
 
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
->>>>>>> ec14c5f (package.json add swagger backend)
 
 dotenv.config({path:'./config/config.env'});
 //connect to db
