@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Link } from "@mui/material";
 import styles from './RegisterPage.module.css';
 import userRegister from '@/libs/userRegister';
+import dynamic from "next/dynamic";
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -104,4 +105,4 @@ const RegisterPage: React.FC = () => {
   );
 };
 
-export default RegisterPage;
+export default dynamic (() => Promise.resolve(RegisterPage), {ssr: false})
