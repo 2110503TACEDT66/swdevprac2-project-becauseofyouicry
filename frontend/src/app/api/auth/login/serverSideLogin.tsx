@@ -1,4 +1,3 @@
-// serverSideLogin.tsx
 import { NextApiRequest, NextApiResponse } from 'next';
 import { signIn } from 'next-auth/react';
 
