@@ -1,50 +1,84 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import getBookings from '@/libs/getBookings';
+// UserProfile.tsx
+"use client"
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import getBookings from '@/libs/getBookings'; // Assuming it returns a Promise<BookingJson>
+import getUserProfile from '@/libs/getUserProfile';
+import BookingCatalog from './bookingCatalog';
 
-const GetMePage: React.FC = () => {
-  const [userInfo, setUserInfo] = useState<any>({});
+interface UserProfile {
+  _id: string;
+  name: string;
+  email: string;
+  // Add any other fields you expect
+}
+interface BookingJson {
+  success: boolean;
+  count: number;
+  data: Booking[];
+}
+
+interface Booking {
+  _id: string;
+  campground: Campground;
+  user: string;
+  Date: string;
+  createdAt: string;
+  __v: number;
+}
+interface Campground {
+  _id: string;
+  name: string;
+  address: string;
+  telephone_number: string;
+  id: string;
+}
+export default function UserProfile() {
+  const { data: session } = useSession();
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [bookings, setBookings] = useState<BookingJson | null>(null); // Initialize bookings state
 
   useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const user = await getUserInfo(); // Assuming this function fetches user info from your backend
-        setUserInfo(user);
-      } catch (error) {
-        console.error('Error fetching user info:', error);
+    const fetchUserProfile = async () => {
+      if (session && session.user.token) {
+        try {
+          const profile = await getUserProfile(session.user.token);
+          setUserProfile(profile.data as UserProfile); // Type assertion
+
+          // Fetch bookings after user profile is retrieved (optional)
+          const bookingData = await getBookings(); // Assuming token is needed for bookings as well
+          setBookings(bookingData);
+        } catch (error) {
+          console.error('Error fetching user profile or bookings:', error);
+        }
       }
     };
 
-    fetchUserInfo();
-  }, []);
+    fetchUserProfile();
+  }, [session]);
 
   return (
     <div className="container mx-auto mt-8">
-      <h1 className="text-3xl font-bold mb-4">Your Information</h1>
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Name:</label>
-          <p className="text-gray-900 text-lg">{}</p>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">Telephone:</label>
-          <p className="text-gray-900 text-lg">{}</p>
-        </div>
+      {session && userProfile ? (
         <div>
-          <h2 className="text-xl font-bold mb-2">Your Bookings:</h2>
-          {/* Assuming you have logic here to display user's bookings */}
-          {/* For example: */}
-          {/* <ul>
-              {userInfo.bookings.map((booking: any) => (
-                <li key={booking.id}>
-                  {booking.campgroundName} - {booking.date}
-                </li>
-              ))}
-            </ul> */}
+          <h1 className="text-3xl font-bold mb-4">{userProfile.name} Information</h1>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Email: {userProfile.email}</label>
+            </div>
+            {/* Omit displaying password */}
+            <div>
+              <h2 className="text-xl font-bold mb-2 text-black">Your Bookings:</h2>
+              {/* Conditionally render BookingCatalog based on bookings availability */}
+              {bookings ? (
+                <BookingCatalog bookingJson={bookings} />
+              ) : (
+                <p>Loading bookings...</p>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
-};
-
-export default GetMePage;
+}

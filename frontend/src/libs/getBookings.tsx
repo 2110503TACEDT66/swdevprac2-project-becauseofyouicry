@@ -1,4 +1,4 @@
-export default function getBookings() {
+export default async function getBookings() {
 
     const response = await fetch(`http://localhost:4000/api/v1/bookings`);
     
