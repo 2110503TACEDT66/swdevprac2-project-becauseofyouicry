@@ -6,15 +6,13 @@ import getCampgroundWeather from "@/libs/getCampgroundWeather";
 
 export default async function CampgoundDetailPage( {params} : {params: {cid:string}}) {
     
-    //console.log(`THIS IS HID ${params.cid}`)
-    //console.log(params.cid)
+   
     const campgroundDetail = await getCampground(params.cid);
 
     const campgroundLocation = await getCampgroundLocation(params.cid);
     const campgroundWeather = await getCampgroundWeather(params.cid);
     
-    console.log(`THIS IS LOCT + ${campgroundLocation.googleMapsUrl}`)
-    console.log(`THIS IS WEAT + ${campgroundWeather.data.weather[0].description}`)
+    
 
     
  
