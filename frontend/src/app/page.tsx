@@ -14,7 +14,7 @@ export default async function Home() {
       <Banner/>
       
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
-        <h1 className='text-xl font-bold'>--- available campgrounds here ---</h1>
+        <h1 className='text-xl font-bold text-emerald-800 font-sans'>- available campgrounds here -</h1>
       </div>
       
       {/* <div style={{margin:"20px",display:"flex" , flexDirection : "row" , alignContent : "space-around",justifyContent:"space-around",flexWrap:"wrap"}}>

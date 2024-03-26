@@ -16,6 +16,9 @@ import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
 import Card from './Card';
 
+import { Link } from '@mui/material';
+
+
 
 export default async function SlidingCard() {
 
@@ -35,18 +38,19 @@ export default async function SlidingCard() {
         //currentClass: 'pagination',
         //el: '.swiper-pagination-custom'
       }}
-    
     >
       <div className=''>
     {
+      
      campgrounds.data.map((campgroundItem:CampgroundItem)=>(
       <SwiperSlide >
-        <Suspense fallback={<p>Loading...<LinearProgress/></p>}>
+          <Link href={`/campground/${campgroundItem._id}`} className="w-1/5">
           <Card campgroundName={campgroundItem.name} imgSrc={`/img/${campgroundItem.name} CARD.jpg`}></Card>
-          
-        </Suspense>
+          </Link>
       </SwiperSlide>
+      
      )) 
+     
      }
      </div>
       
