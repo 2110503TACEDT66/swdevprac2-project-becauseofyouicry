@@ -9,5 +9,13 @@ declare module "next-auth" {
             role: string,
             token: string
         }
+        booking : {
+            id: string,
+            campground: string,
+            user: string,
+            date: Date,
+            createdAt: Date
+        };
+
     }
 }
