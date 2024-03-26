@@ -20,9 +20,9 @@ const RegisterPage: React.FC = () => {
       console.log('Registration successful');
       alert('Registration successful');
       // Redirect or navigate to another page here if needed
-    } catch (error) {
-      setError(error.message || 'Failed to register user');
-      console.error('Error registering user:', error);
+    } catch (error: unknown) {
+      const err = error as any ;
+      throw new Error(err.message || 'Failed to register user');
     }
   };
 

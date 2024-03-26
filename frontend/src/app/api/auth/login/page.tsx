@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
       redirect: false
     });
 
-    if (result.error) {
+    if (result?.error) {
       setError(result.error);
     }else{
       alert('Login successful!');
