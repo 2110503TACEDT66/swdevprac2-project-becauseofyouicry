@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
     const result = await signIn('credentials', {
       email,
       password,
-      redirect: false // Prevent NextAuth from automatically redirecting
+      redirect: false
     });
 
     if (result.error) {
