@@ -13,6 +13,12 @@ const helmet = require('helmet');
 const {xss} = require('express-xss-sanitizer');
 const hpp = require('hpp');
 const cors = require('cors');
+<<<<<<< HEAD
+=======
+
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+>>>>>>> ec14c5f (package.json add swagger backend)
 
 dotenv.config({path:'./config/config.env'});
 //connect to db
@@ -40,17 +46,15 @@ app.use('/api/v1/auth',auth);
 app.use('/api/v1/bookings',bookings);
 
 
-app.get('/', (req,res) => {
-    res.status(200).json({success:true, data:{id:1}});
-});
+// app.get('/', (req,res) => {
+//     res.status(200).json({success:true, data:{id:1}});
+// });
 
 const PORT = process.env.PORT || 4000;
 
 const server = app.listen(PORT, console.log('Server running in ', process.env.NODE_ENV, ' mode on port ', PORT));
 
-process.on('unhandledRejection',(err,prommise)=>{
+process.on('unhandledRejection',(err,promise)=> {
     console.log(`Error: ${err.message}`);
-
     server.close(()=>process.exit(1));
-
 })
