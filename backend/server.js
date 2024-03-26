@@ -13,7 +13,6 @@ const helmet = require('helmet');
 const {xss} = require('express-xss-sanitizer');
 const hpp = require('hpp');
 const cors = require('cors');
-const swaggerJSDoc = require('swagger-jsdoc');
 
 dotenv.config({path:'./config/config.env'});
 //connect to db
@@ -47,33 +46,7 @@ app.get('/', (req,res) => {
 
 const PORT = process.env.PORT || 4000;
 
-const server = app.listen(
-    PORT, 
-    console.log('Server running in ', 
-    process.env.NODE_ENV,
-    ' on' + process.env.HOST + ":" + PORT
-    )
-);
-
-const swaggerOptions={
-    swaggerDefinition:{
-        openapi: '3.0.0',
-        info: {
-        title: 'Campground API',
-        version: '1.0.0',
-        description: 'Campground Booking API'
-        },
-        servers:[
-            {
-                url: process.env.HOST + ":" + PORT + '/api/v1'
-            }
-        ],
-    },
-    apis:['./routes/*.js'],
-};
-
-const swaggerDocs=swaggerJSDoc(swaggerOptions);
-app.use('/api-docs', swaggerUI.serve,swaggerUI.setup(swaggerDocs));
+const server = app.listen(PORT, console.log('Server running in ', process.env.NODE_ENV, ' mode on port ', PORT));
 
 process.on('unhandledRejection',(err,prommise)=>{
     console.log(`Error: ${err.message}`);

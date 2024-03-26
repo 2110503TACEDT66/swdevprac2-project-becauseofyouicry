@@ -1,36 +1,38 @@
-// LoginPage.tsx
 'use client'
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import dynamic from 'next/dynamic'; // Import dynamic
+import { useRouter } from 'next/navigation';
 import { Link } from '@mui/material';
 import styles from './LoginPage.module.css';
-
-const DynamicRouter = dynamic(() => import('next/router')); // Dynamically import router
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const router = useRouter();
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const router = DynamicRouter(); // Use the router here
 
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false
-    });
+    try {
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false
+      });
 
-    if (result?.error) {
-      setError(result.error);
-    } else {
-      if (router) { // Check if router is available
-        router.push('/'); // Redirect to the homepage
+      if (result?.error) {
+        setError(result.error);
       } else {
-        alert('Login Successful !');
+        if (router) {
+          alert('Login Success!')
+          router.push('/');
+        }
       }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setError('An error occurred during login.');
     }
   };
 
