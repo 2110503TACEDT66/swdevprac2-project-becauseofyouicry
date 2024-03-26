@@ -2,24 +2,27 @@
 import React, { useState } from 'react';
 import { Link } from "@mui/material";
 import styles from './RegisterPage.module.css'; // Import your CSS file
+import userRegister from '@/libs/userRegister'; // Import your userRegister function
 
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [tel, setTel] = useState('');
   const [error, setError] = useState('');
 
-  const handleRegister = () => {
-    // Here you can perform registration logic, like sending registration data to a server
-    // For simplicity, let's assume a basic validation here
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-    } else {
-      // Perform registration
-      console.log('Registration successful'); // Replace with your actual success handling
-      // Redirect or navigate to another page here
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
+
+    try {
+      // Call userRegister function
+      await userRegister(username, email, password, tel);
+      console.log('Registration successful');
+      alert('Registration successful');
+      // Redirect or navigate to another page here if needed
+    } catch (error) {
+      setError(error.message || 'Failed to register user');
+      console.error('Error registering user:', error);
     }
   };
 
@@ -29,7 +32,7 @@ const RegisterPage: React.FC = () => {
         <div className="bg-white p-8 rounded shadow-md w-80 relative z-10">
           <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
           {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
-          <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }} className="space-y-4">
+          <form onSubmit={handleRegister} className="space-y-4">
             <div>
               <label htmlFor="username" className="block mb-1">Username:</label>
               <input
@@ -57,16 +60,6 @@ const RegisterPage: React.FC = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
-              />
-            </div>
-            <div>
-              <label htmlFor="confirmPassword" className="block mb-1">Confirm Password:</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-300"
               />
             </div>
