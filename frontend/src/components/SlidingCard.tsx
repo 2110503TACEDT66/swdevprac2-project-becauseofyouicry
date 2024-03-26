@@ -7,8 +7,8 @@ import 'swiper/css/bundle'
 import 'swiper/css/pagination';
 import './navigation.css'
 import './pagination.css'
-
-
+import { CampgroundJson } from '../../interface';
+import { CampgroundItem } from '../../interface';
 import Card from './Card';
 
 import { Link } from '@mui/material';
