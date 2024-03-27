@@ -28,8 +28,9 @@ const LoginPage: React.FC = () => {
         setError(result.error);
       } else {
         if (router) {
-          alert('Login Success!!')
-          router.push('/');
+          alert('Login Success !!!')
+          window.location.reload();
+          window.location.href = "/";
         }
       }
     } catch (error) {
