@@ -1,12 +1,15 @@
-export default async function getBookings() {
+export default async function getBookings(token: string) {
+  const response = await fetch(`http://localhost:4000/api/v1/bookings`, {
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
+  });
 
-    const response = await fetch(`http://localhost:4000/api/v1/bookings`);
-    
-    // Check if the response is successful
-    if (!response.ok) {
-        throw new Error("Failed to fetch bookings");
-    }
+  // Check if the response is successful
+  if (!response.ok) {
+    throw new Error("Failed to fetch bookings");
+  }
 
-    // Parse the JSON response and return it
-    return await response.json();
+  // Parse the JSON response and return it
+  return await response.json();
 }

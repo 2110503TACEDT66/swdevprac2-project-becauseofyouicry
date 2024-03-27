@@ -9,9 +9,31 @@ export interface CampgroundItem {
     id: string
   }
   
-  export interface CampgroundJson {
-    success: boolean,
-    count: number,
-    pagination: Object,
-    data: CampgroundItem[]
-  }
+export interface CampgroundJson {
+  success: boolean,
+  count: number,
+  pagination: Object,
+  data: CampgroundItem[]
+}
+
+export interface UserJson {
+  _id: string;
+  name: string;
+  telephone: string;
+  email: string;
+  role: string;
+  createdAt: string;
+}
+export interface BookingJson {
+  _id : string,
+  campground: CampgroundItem;
+  user: string;
+  Date: string;
+  createdAt: string;
+}
+
+export interface BookingsJson {
+  success: boolean;
+  count: number;
+  data: BookingJson[];
+}
