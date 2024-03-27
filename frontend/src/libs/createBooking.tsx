@@ -25,7 +25,8 @@ export default async function createBooking(
             const errorData = await response.json();
             throw new Error(errorData.message);
         }
-
+        
+        
         return await response.json();
     } catch (error : unknown) {
         const err = error as any ;

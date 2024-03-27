@@ -9,6 +9,7 @@ import CampgroundCatalog2 from "./campgroundCatalog2";
 import getCampgrounds from "@/libs/getCampgrounds";
 import { CampgroundJson } from "../../../interface";
 import Alert from '@mui/material/Alert';
+import getExistingBookings from "@/libs/getExistingBooking";
 
 const WhiteBorderTextField = styled(TextField)`
   & label.Mui-focused {
@@ -34,6 +35,7 @@ export default function Bookings() {
   const [error, setError] = useState<string | null>(null);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [existingBookings, setExistingBookings] = useState([]);
 
   useEffect(() => {
     const fetchCampgrounds = async () => {
@@ -45,6 +47,32 @@ export default function Bookings() {
     fetchCampgrounds();
   }, []);
 
+  useEffect(() => {
+    const fetchExistingBookings = async () => {
+      try {
+        if (selectedCampgroundid && selectedDate) {
+          const bookings = await getExistingBookings(selectedCampgroundid, selectedDate);
+          setExistingBookings(bookings);
+
+          localStorage.setItem('existingBookings', JSON.stringify(bookings));
+        }
+      } catch (error) {
+        console.error("Error fetching existing bookings:", error);
+      }
+    };
+
+    fetchExistingBookings();
+
+    const intervalId = setInterval(fetchExistingBookings,10);
+
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
+
+  }, [selectedCampgroundid, selectedDate]);
+
+    
+
+  
   if (!selectedCampground) {
     return null;
   }
@@ -56,6 +84,14 @@ export default function Bookings() {
         console.error("Session or user token not available");
         return;
       }
+
+      if (existingBookings.length > 0) {
+        setError("This place is already booked for the selected date. Please choose a different date or campground.");
+        setShowAlert(true);
+        setLoading(false);
+        return;
+      }
+
       await createBooking(
         selectedCampgroundid,
         session.user._id,
@@ -66,8 +102,8 @@ export default function Bookings() {
       setError(null);
       setAlertMessage("Booking created successfully");
     } catch (error) {
-      setError("Error creating booking:" + error);
-      setAlertMessage("Error creating booking:" + error);
+      setError(`${error}`);
+      setAlertMessage(`${error}`);
     } finally {
       setShowAlert(true);
       setLoading(false);
