@@ -26,11 +26,13 @@ export default function CampgroundCatalog2({
             setSelectedCampgroundid(e.target.value),
               onCampgroundChange(e.target.value);
           }}
+          required
         >
           {campgroundJson.data.map((campground: CampgroundItem) => (
             <MenuItem value={campground._id}>{campground.name}</MenuItem>
           ))}
         </Select>
+        
       </FormControl>
     </div>
   );

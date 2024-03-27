@@ -2,11 +2,18 @@
 export default async function createBooking(
     campgroundId: string,
     userId: string,
-    date: string, 
+    date: Date, 
     createdAt: string,
     token: string
 ) {
     try {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1; // Month is zero-indexed, so add 1
+        const day = date.getDate();
+
+        // Construct a new Date object with only the date components
+        const formattedDate = new Date(year, month - 1, day);
+
         const response = await fetch(`http://localhost:4000/api/v1/campgrounds/${campgroundId}/bookings/`, {
             method: "POST",
             headers: {
@@ -16,8 +23,8 @@ export default async function createBooking(
             body: JSON.stringify({
                 campgroundId: campgroundId,
                 user: userId,
-                Date: date, 
-                createdAt: createdAt 
+                Date: formattedDate.toISOString(), 
+                createdAt: createdAt
             })
         });
 

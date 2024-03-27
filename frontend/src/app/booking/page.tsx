@@ -71,11 +71,12 @@ export default function Bookings() {
   }, [selectedCampgroundid, selectedDate]);
 
     
-
+  console.log(`THIS IS SELECTED ID : "${selectedCampgroundid}"`)
   
   if (!selectedCampground) {
     return null;
   }
+  
 
   const handleBooking = async () => {
     try {
@@ -84,6 +85,7 @@ export default function Bookings() {
         console.error("Session or user token not available");
         return;
       }
+      
 
       if (existingBookings.length > 0) {
         setError("This place is already booked for the selected date. Please choose a different date or campground.");
@@ -95,7 +97,7 @@ export default function Bookings() {
       await createBooking(
         selectedCampgroundid,
         session.user._id,
-        selectedDate.toISOString(),
+        selectedDate,
         new Date().toISOString(),
         session.user.token
       );
