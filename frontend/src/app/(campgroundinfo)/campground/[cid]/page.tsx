@@ -25,22 +25,22 @@ export default async function CampgoundDetailPage( {params} : {params: {cid:stri
                     </button>
                 </Link>
             </div>
-            <div className="flex flex-row my-5 bg-slate-50 bg-opacity-50 rounded-lg">
+            <div className="flex flex-row my-5 bg-slate-50 bg-opacity-70 rounded-lg">
                 <Image src={ `/img/${campgroundDetail.data.name} CARD.jpg` } 
                 alt="hospitalimage"
                 width={0} height={0} sizes="100vw"
                 className="rounded-lg w-[30%]"/>
-                <div className="text-md mx-5 text-left pt-3 font-bold text-emerald-800">{campgroundDetail.data.name}
+                <div className="text-lg mx-5 text-left pt-3 font-bold text-emerald-800">{campgroundDetail.data.name}
                 
-                <div className="text-md mx-5 pt-3">Address : {campgroundDetail.data.address}</div>
-                <div className="text-md mx-5 ">Telephone : {campgroundDetail.data.telephone_number}</div>
-                <div className="text-md mx-5 ">Current Weather : {campgroundWeather.data.weather[0].description}</div>
-                <div className="text-md mx-5 ">Current Temperature : {campgroundWeather.data.main.temp} °C </div>
+                <div className="text-base mx-5 pt-3 text-black">Address : {campgroundDetail.data.address}</div>
+                <div className="text-base mx-5 text-black">Telephone : {campgroundDetail.data.telephone_number}</div>
+                <div className="text-base mx-5 text-black">Current Weather : {campgroundWeather.data.weather[0].description}</div>
+                <div className="text-base mx-5 text-black">Current Temperature : {campgroundWeather.data.main.temp} °C </div>
             
                 <div className='pt-8  pb-3'>
                 <Link href={campgroundLocation.googleMapsUrl}>
-                    <button className="bg-emerald-800 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded">
-                        GoogleMapLink
+                    <button className="bg-emerald-800 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded text-base">
+                        GoogleMaps
                     </button>
                 </Link>
                 </div>
