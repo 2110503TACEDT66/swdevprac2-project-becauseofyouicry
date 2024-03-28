@@ -1,4 +1,3 @@
-// UserProfile.tsx
 'use client'
 import React from 'react';
 import { useEffect, useState } from "react";
@@ -84,7 +83,7 @@ export default function UserProfile() {
                 <h2 className="text-2xl font-bold mb-2 text-black">
                   Your Bookings [{bookings.data.length}] : 
                 </h2>
-                <BookingCatalog bookingJson={bookings} />
+                <BookingCatalog bookingJson={bookings} userRole={userProfile.role}/>
               </div>
             </div>
           </div>
@@ -93,3 +92,5 @@ export default function UserProfile() {
     </div>
   );
 }
+
+
