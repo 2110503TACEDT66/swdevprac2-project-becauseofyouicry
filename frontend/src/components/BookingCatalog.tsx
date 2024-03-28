@@ -169,6 +169,13 @@ export default function BookingCatalog({
   };
 
   if (!selectedCampground) return null;
+  // if(bookings.length == 0) {
+  //   return(
+  //     <div className="text-black text-center text-lg">
+  //       empty
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="relative m-5 grid grid-cols-1 gap-5">

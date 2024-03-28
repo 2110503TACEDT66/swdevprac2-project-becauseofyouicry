@@ -120,12 +120,12 @@ export default function Bookings() {
   };
 
   return (
-    <main className="w-full flex flex-col items-center space-y-4 relative" style={{ backgroundImage: `url('/img/bookingbg.jpg')`, backgroundSize: 'cover', height: '100vh', width: '100vw' }}>
+    <main className="w-full flex flex-col items-center space-y-4 relative" style={{ backgroundImage: `url('/img/bookingbg.jpg')`, backgroundSize: 'cover', height: '100vh', width: '100vw'}}>
       {session && session.user.token ? (
         <>
           <div className="m-1 pt-8 text-lg font-bold text-white">Campground Booking</div>
-          <div className="w-full max-w-lg space-y-2 mt-8 relative rounded-lg" style={{ backgroundColor: "#576453" }}>
-            <div className="flex justify-center">
+          <div className="w-full max-w-lg space-y-2 mt-8 relative rounded-lg" style={{ backgroundColor: "#f0fdf4" }}>
+            <div className="flex justify-center pt-2">
               <CampgroundCatalog2
                 campgroundJson={selectedCampground}
                 onCampgroundChange={(value: string) => {
@@ -138,8 +138,8 @@ export default function Bookings() {
           <div className="w-full max-w-lg space-y-2">
             <Button
               variant="contained"
-              className="w-full"
-              style={{ backgroundColor: "#576453" }}
+              className="w-full text-md font-bold text-emerald-900 hover:text-white bg-[#f0fdf4] hover:bg-emerald-800"
+              //style={{ backgroundColor: "#f0fdf4" }}
               onClick={handleBooking}
               disabled={loading}
             >
