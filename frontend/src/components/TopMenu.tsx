@@ -23,7 +23,7 @@ export default async function TopMenu() {
         <>
           <Link href="/getme">
             <div className="flex items-center absolute right-2 h-full px-2 text-white text-sm hover:underline underline-offset-2 font-bold duration-500">
-              MyProfile
+              My Profile
             </div>
           </Link>
         </>

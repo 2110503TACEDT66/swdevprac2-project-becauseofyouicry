@@ -32,7 +32,7 @@ export default function Bookings() {
   const [selectedCampground, setSelectedCampground] =
     useState<CampgroundJson | null>(null);
   const [selectedCampgroundid, setSelectedCampgroundid] = useState<string>("");
-  const [error, setError] = useState<string | null>(null);
+  const [isError, setIsError] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [existingBookings, setExistingBookings] = useState([]);
@@ -50,8 +50,8 @@ export default function Bookings() {
   useEffect(() => {
     const fetchExistingBookings = async () => {
       try {
-        if (selectedCampgroundid && selectedDate) {
-          const bookings = await getExistingBookings(selectedCampgroundid, selectedDate);
+        if (selectedCampgroundid && selectedDate && session?.user.token) {
+          const bookings = await getExistingBookings(selectedCampgroundid, selectedDate, session.user.token);
           setExistingBookings(bookings);
 
           localStorage.setItem('existingBookings', JSON.stringify(bookings));
@@ -63,12 +63,7 @@ export default function Bookings() {
 
     fetchExistingBookings();
 
-    const intervalId = setInterval(fetchExistingBookings,10);
-
-    
-    return () => clearInterval(intervalId);
-
-  }, [selectedCampgroundid, selectedDate]);
+  }, [selectedCampgroundid, selectedDate, session?.user.token]);
 
     
   console.log(`THIS IS SELECTED ID : "${selectedCampgroundid}"`)
@@ -85,18 +80,18 @@ export default function Bookings() {
         return;
       }
       
-      
-
       if (existingBookings.length > 0) {
-        setError("This place is already booked for the selected date. Please choose a different date or campground.");
+        setIsError(true);
+        setAlertMessage("This place is already booked for the selected date. Please choose a different date or campground.");
         setShowAlert(true);
         setLoading(false);
         return;
       }
 
       if (selectedCampgroundid=="") {
-        //console.log(`THIS IS ID :"${selectedCampgroundid}`)
-        setError("Please select a campground to book");
+        setIsError(true);
+        console.log(`THIS IS ID :"${selectedCampgroundid}`)
+        setAlertMessage("Please select a campground to book");
         setShowAlert(true);
         setLoading(false);
         return;
@@ -109,13 +104,10 @@ export default function Bookings() {
         new Date().toISOString(),
         session.user.token
       );
-      setError(null);
+      setIsError(false);
       setAlertMessage("Booking created successfully");
     } catch (error) {
-      if(`${error}` == ""){
-        setError("Please select campground")
-      }
-      setError(`${error}`);
+      setIsError(true);
       setAlertMessage(`${error}`);
     } finally {
       setShowAlert(true);
@@ -156,7 +148,7 @@ export default function Bookings() {
           </div>
           {showAlert && (
             <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
-              <Alert severity={error ? "error" : "success"}>{alertMessage}</Alert>
+              <Alert severity={isError ? "error" : "success"}>{alertMessage}</Alert>
             </div>
           )}
         </>

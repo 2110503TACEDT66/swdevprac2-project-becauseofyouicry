@@ -52,7 +52,7 @@ export default function BookingCatalog({ bookingJson , userRole}: { bookingJson:
         console.log('Booking updated successfully');
         setEditMode(null); // Exit edit mode after saving
         // Refresh
-      window.location.reload();
+      //window.location.reload();
       } catch (error) {
         console.error('Error updating booking:', error);
       }
@@ -74,7 +74,7 @@ export default function BookingCatalog({ bookingJson , userRole}: { bookingJson:
       // Remove the deleted booking from the state
       setBookings(prevBookings => prevBookings.filter(booking => booking._id !== bookingId));
       // Refresh
-      window.location.reload();
+      //window.location.reload();
 
     } catch (error) {
       console.error('Error deleting booking:', error);

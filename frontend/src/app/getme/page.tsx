@@ -9,7 +9,10 @@ import { UserJson } from "../../../interface";
 import { BookingsJson } from "../../../interface";
 import Link from 'next/link';
 import { Button } from '@mui/material';
+
 import styled from 'styled-components';
+import { Suspense} from "react"
+import { LinearProgress } from "@mui/material"
 
 // Styled Button for Logout
 const StyledButton = styled(Button)`
@@ -83,7 +86,9 @@ export default function UserProfile() {
                 <h2 className="text-2xl font-bold mb-2 text-black">
                   Your Bookings [{bookings.data.length}] : 
                 </h2>
+                <Suspense fallback={<p className='text-emerald-900 items-center'>Loading...<LinearProgress/></p>}>
                 <BookingCatalog bookingJson={bookings} userRole={userProfile.role}/>
+                </Suspense>
               </div>
             </div>
           </div>

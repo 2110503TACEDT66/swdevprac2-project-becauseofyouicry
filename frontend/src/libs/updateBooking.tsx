@@ -15,7 +15,7 @@ export default async function updateBooking(_id : string,campground: string,date
             },
             body: JSON.stringify({
                 campground: campground,
-                Date: date, 
+                Date: formattedDate, 
             })
         });
 

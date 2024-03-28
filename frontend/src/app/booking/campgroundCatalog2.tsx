@@ -15,15 +15,27 @@ export default function CampgroundCatalog2({
 
   const theme = createTheme({
     palette: {
+      text: {
+        primary: '#e3f2fd'
+      },
+      background: {
+        paper: '#000000',
+        default: '#000000'
+      },
       primary: {
         main: '#e3f2fd',
         light: '#e3f2fd',
         dark: '#e3f2fd',
         contrastText: '#e3f2fd'
-
       },
       secondary: {
-        main: '#e3f2fd'
+        main: '#ef5350'
+      },
+      info: {
+        main: '#e3f2fd',
+        light: '#e3f2fd',
+        dark: '#e3f2fd',
+        contrastText: '#e3f2fd'
       },
     },
   });
@@ -34,7 +46,7 @@ export default function CampgroundCatalog2({
   return (
     <div>
       <ThemeProvider theme={theme}>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: 200 }} color="primary">
         <InputLabel id="demo-simple-select-standard-label" color="primary">
           Select Campground
         </InputLabel>
