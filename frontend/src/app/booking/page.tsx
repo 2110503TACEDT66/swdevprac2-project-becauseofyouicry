@@ -65,7 +65,7 @@ export default function Bookings() {
 
     const intervalId = setInterval(fetchExistingBookings,10);
 
-    // Clean up interval on component unmount
+    
     return () => clearInterval(intervalId);
 
   }, [selectedCampgroundid, selectedDate]);
@@ -76,7 +76,6 @@ export default function Bookings() {
   if (!selectedCampground) {
     return null;
   }
-  
 
   const handleBooking = async () => {
     try {
@@ -86,9 +85,18 @@ export default function Bookings() {
         return;
       }
       
+      
 
       if (existingBookings.length > 0) {
         setError("This place is already booked for the selected date. Please choose a different date or campground.");
+        setShowAlert(true);
+        setLoading(false);
+        return;
+      }
+
+      if (selectedCampgroundid=="") {
+        //console.log(`THIS IS ID :"${selectedCampgroundid}`)
+        setError("Please select a campground to book");
         setShowAlert(true);
         setLoading(false);
         return;
@@ -104,6 +112,9 @@ export default function Bookings() {
       setError(null);
       setAlertMessage("Booking created successfully");
     } catch (error) {
+      if(`${error}` == ""){
+        setError("Please select campground")
+      }
       setError(`${error}`);
       setAlertMessage(`${error}`);
     } finally {
@@ -117,10 +128,11 @@ export default function Bookings() {
   };
 
   return (
-    <main className="w-full flex flex-col items-center space-y-4 relative">
+    <main className="w-full flex flex-col items-center space-y-4 relative" style={{ backgroundImage: `url('/img/bookingbg.jpg')`, backgroundSize: 'cover', height: '100vh', width: '100vw' }}>
       {session && session.user.token ? (
         <>
-          <div className="w-full max-w-lg space-y-2 mt-8 relative" style={{ backgroundColor: "#576453" }}>
+          <div className="m-1 pt-8 text-lg font-bold text-white">Campground Booking</div>
+          <div className="w-full max-w-lg space-y-2 mt-8 relative rounded-lg" style={{ backgroundColor: "#576453" }}>
             <div className="flex justify-center">
               <CampgroundCatalog2
                 campgroundJson={selectedCampground}
