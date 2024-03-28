@@ -127,4 +127,10 @@ export default function BookingCatalog({ bookingJson }: { bookingJson: BookingsJ
       ))}
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+};
+
+export default BookingCatalog;
+>>>>>>> cc72ba5bee1ebacb958842c541d87f8626707ce0
