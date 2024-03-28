@@ -14,7 +14,7 @@ export default async function TopMenu() {
             <div className={styles.menucontainer}>
             <Image src={'/img/logo.png'} id='logoimage' className={styles.logoimg} alt='logo'
             width={0} height={0} sizes='100vh'/>
-            <TopMenuItem title='Main' pageRef='/'/>
+            <TopMenuItem title='Home' pageRef='/'/>
             <TopMenuItem title='Booking' pageRef='/booking'/>
             <TopMenuItem title='About us' pageRef='/aboutus'/>
 
