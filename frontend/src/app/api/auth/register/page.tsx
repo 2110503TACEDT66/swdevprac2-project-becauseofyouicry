@@ -16,14 +16,19 @@ const RegisterPage: React.FC = () => {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!username || !email || !password || !tel) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
     try {
       await userRegister(username, email, password, tel);
       console.log('Registration successful');
       alert('Registration successful');
     } catch (error: unknown) {
       const err = error as any ;
-      alert('Please check your tel. or Email it already registered.');
-      throw new Error(err.message || 'Failed to register user');
+      alert('Your email or phone number is already registerd.');
+      // throw new Error(err.message || 'Failed to register user');
     }
   };
 

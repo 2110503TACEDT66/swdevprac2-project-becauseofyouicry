@@ -8,10 +8,9 @@ export default async function createBooking(
 ) {
     try {
         const year = date.getFullYear();
-        const month = date.getMonth() + 1; // Month is zero-indexed, so add 1
+        const month = date.getMonth() + 1;
         const day = date.getDate();
 
-        // Construct a new Date object with only the date components
         const formattedDate = new Date(year, month - 1, day);
 
         const response = await fetch(`http://localhost:4000/api/v1/campgrounds/${campgroundId}/bookings/`, {

@@ -110,6 +110,7 @@ exports.addBooking = async (req, res, next) => {
 
 exports.updateBooking = async (req, res, next) => {
     try {
+        console.log("updateBooking");
         let booking = await Booking.findById(req.params.id);
 
         if (!booking) {
@@ -137,11 +138,11 @@ exports.updateBooking = async (req, res, next) => {
 
         // ++Check for existing bookings for the same campground and date
         const existingBookings = await Booking.find({
-            campground: booking.campground,
-            Date: req.body.Date,
+            campground: req.body.campground,
+            Date: new Date(req.body.Date),
             _id: { $ne: req.params.id } // Exclude the current booking being updated
         });
-
+        console.log("this is existing booking : ",existingBookings);
         if (existingBookings.length > 0) {
             return res.status(400).json({
                 success: false,

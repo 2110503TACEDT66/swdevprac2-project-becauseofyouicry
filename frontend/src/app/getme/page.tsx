@@ -1,4 +1,3 @@
-// UserProfile.tsx
 'use client'
 import React from 'react';
 import { useEffect, useState } from "react";
@@ -10,7 +9,10 @@ import { UserJson } from "../../../interface";
 import { BookingsJson } from "../../../interface";
 import Link from 'next/link';
 import { Button } from '@mui/material';
+
 import styled from 'styled-components';
+import { Suspense} from "react"
+import { LinearProgress } from "@mui/material"
 
 // Styled Button for Logout
 const StyledButton = styled(Button)`
@@ -75,16 +77,18 @@ export default function UserProfile() {
                 <div className="absolute top-0 right-0 mt-4 mr-6"> {/* Position Logout button */}
                   <Link href="/api/auth/signout">
                     <StyledButton>
-                      log-out
+                      log out
                     </StyledButton>
                   </Link>
                 </div>
               </div>
               <div>
-                <h2 className="text-2xl font-bold mb-2 text-black">
-                  Your Bookings [{bookings.data.length}] : 
+                <h2 className="text-xl font-bold mb-2 text-black">
+                  Your Bookings  : 
                 </h2>
-                <BookingCatalog bookingJson={bookings} />
+                <Suspense fallback={<p className='text-emerald-900 items-center'>Loading...<LinearProgress/></p>}>
+                <BookingCatalog bookingJson={bookings} userRole={userProfile.role}/>
+                </Suspense>
               </div>
             </div>
           </div>
@@ -93,3 +97,5 @@ export default function UserProfile() {
     </div>
   );
 }
+
+
